@@ -1,0 +1,344 @@
+/* McStudio Ribbon local stylesheet.
+ * Keep selectors scoped to McStudio object names/properties so the global
+ * FreeCAD UI remains untouched.
+ */
+
+QDockWidget#McStudioRibbonDockHost {
+    border: none;
+    background: palette(window);
+}
+
+QWidget#McStudioRibbonDockTitleBar {
+    border: none;
+    background: transparent;
+    min-height: 0px;
+    max-height: 0px;
+}
+
+QFrame#McStudioRibbonHost {
+    border: none;
+    border-bottom: 1px solid palette(midlight);
+    background: palette(window);
+    padding: 0px;
+    spacing: 0px;
+}
+
+QTabWidget#McStudioRibbonTabs {
+    border: none;
+    padding: 0px;
+    background: palette(window);
+}
+
+QTabWidget#McStudioRibbonTabs::pane {
+    border-top: 1px solid palette(midlight);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background: palette(window);
+    margin: 0px;
+    top: -1px;
+}
+
+QTabWidget#McStudioRibbonTabs QTabBar::tab {
+    padding: 5px 17px 4px 17px;
+    margin: 0px 1px 0px 0px;
+    border: 1px solid transparent;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: none;
+    background: palette(window);
+    color: palette(text);
+}
+
+QTabWidget#McStudioRibbonTabs QTabBar::tab:selected {
+    border: 1px solid palette(midlight);
+    border-bottom: 2px solid palette(highlight);
+    background: palette(base);
+    color: palette(text);
+}
+
+QTabWidget#McStudioRibbonTabs QTabBar::tab:selected:hover {
+    background: palette(base);
+}
+
+QTabWidget#McStudioRibbonTabs QTabBar::tab:!selected:hover {
+    border: 1px solid palette(midlight);
+    border-bottom: none;
+    background: palette(button);
+}
+
+QTabWidget#McStudioRibbonTabs QTabBar::tab:focus {
+    border: 1px solid palette(highlight);
+}
+
+QScrollArea#McStudioRibbonPage,
+QWidget#McStudioRibbonPageContent {
+    background: palette(window);
+    border: none;
+}
+
+QScrollArea#McStudioRibbonPage QScrollBar:horizontal {
+    height: 8px;
+    background: palette(window);
+}
+
+QScrollArea#McStudioRibbonPage QScrollBar::handle:horizontal {
+    min-width: 24px;
+    border-radius: 3px;
+    background: palette(midlight);
+}
+
+QScrollArea#McStudioRibbonPage QScrollBar::handle:horizontal:hover {
+    background: palette(mid);
+}
+
+QScrollArea#McStudioRibbonPage QScrollBar::add-line:horizontal,
+QScrollArea#McStudioRibbonPage QScrollBar::sub-line:horizontal {
+    width: 0px;
+    border: none;
+    background: transparent;
+}
+
+QFrame#McStudioRibbonGroup {
+    border: none;
+    border-right: 1px solid palette(midlight);
+    border-radius: 0px;
+    background: transparent;
+}
+
+QFrame#McStudioRibbonGroup:hover {
+    border-right: 1px solid palette(mid);
+    background: palette(base);
+}
+
+QWidget#McStudioRibbonCommandRow,
+QWidget#McStudioRibbonSecondaryColumn {
+    border: none;
+    background: transparent;
+}
+
+QLabel#McStudioRibbonGroupLabel {
+    border: none;
+    background: transparent;
+    color: palette(mid);
+    padding-top: 2px;
+    padding-bottom: 1px;
+}
+
+QWidget[ribbonRole="large"],
+QWidget[ribbonRole="small"],
+QWidget[ribbonRole="icon"] {
+    border: none;
+    background: transparent;
+    padding: 0px;
+    spacing: 2px;
+}
+
+QFrame#McStudioRibbonCommandSeparator {
+    color: palette(midlight);
+    background: palette(midlight);
+    max-width: 1px;
+    margin: 2px 3px 2px 3px;
+}
+
+QWidget[ribbonRole="large"] QToolButton {
+    padding: 4px 8px;
+    min-width: 48px;
+    min-height: 48px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+}
+
+QWidget[ribbonRole="small"] QToolButton {
+    padding: 2px 6px;
+    min-height: 22px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+}
+
+QWidget[ribbonRole="icon"] QToolButton {
+    padding: 2px 3px;
+    min-width: 22px;
+    min-height: 22px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+}
+
+QWidget[ribbonRole="large"] QToolButton:hover,
+QWidget[ribbonRole="small"] QToolButton:hover,
+QWidget[ribbonRole="icon"] QToolButton:hover {
+    background: palette(button);
+    border: 1px solid palette(midlight);
+}
+
+QWidget[ribbonRole="large"] QToolButton:focus,
+QWidget[ribbonRole="small"] QToolButton:focus,
+QWidget[ribbonRole="icon"] QToolButton:focus {
+    border: 1px solid palette(highlight);
+}
+
+QWidget[ribbonRole="large"] QToolButton:pressed,
+QWidget[ribbonRole="small"] QToolButton:pressed,
+QWidget[ribbonRole="icon"] QToolButton:pressed,
+QWidget[ribbonRole="large"] QToolButton:checked,
+QWidget[ribbonRole="small"] QToolButton:checked,
+QWidget[ribbonRole="icon"] QToolButton:checked {
+    background: palette(highlight);
+    color: palette(highlighted-text);
+    border: 1px solid palette(highlight);
+}
+
+QWidget[ribbonRole="large"] QToolButton:disabled,
+QWidget[ribbonRole="small"] QToolButton:disabled,
+QWidget[ribbonRole="icon"] QToolButton:disabled {
+    color: palette(mid);
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+QWidget[ribbonRole="large"] QToolButton::menu-button,
+QWidget[ribbonRole="small"] QToolButton::menu-button,
+QWidget[ribbonRole="icon"] QToolButton::menu-button {
+    border-left: 1px solid palette(midlight);
+    width: 16px;
+}
+
+QWidget[ribbonRole="large"] QToolButton::menu-arrow,
+QWidget[ribbonRole="small"] QToolButton::menu-arrow,
+QWidget[ribbonRole="icon"] QToolButton::menu-arrow {
+    width: 8px;
+    height: 8px;
+}
+
+QWidget[ribbonRole="large"] QToolButton:checked::menu-button,
+QWidget[ribbonRole="small"] QToolButton:checked::menu-button,
+QWidget[ribbonRole="icon"] QToolButton:checked::menu-button,
+QWidget[ribbonRole="large"] QToolButton:pressed::menu-button,
+QWidget[ribbonRole="small"] QToolButton:pressed::menu-button,
+QWidget[ribbonRole="icon"] QToolButton:pressed::menu-button {
+    border-left: 1px solid palette(highlighted-text);
+}
+
+/* SolidWorks-like McStudio top control bar. */
+QFrame#McStudioTopControlBar {
+    border: none;
+    border-bottom: 1px solid #d7dde7;
+    background: #fbfcff;
+    padding: 0px;
+}
+
+QLabel#McStudioBrandLogo {
+    border: 1px solid #c9222a;
+    border-radius: 8px;
+    background: #d71920;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+QLabel#McStudioBrandLabel {
+    font-weight: 750;
+    font-size: 18px;
+    color: #d71920;
+    padding-left: 2px;
+    padding-right: 18px;
+}
+
+QWidget#McStudioQuickAccessBar,
+QWidget#McStudioTopRightBar {
+    border: none;
+    background: transparent;
+}
+
+QToolButton#McStudioTopCommandButton,
+QToolButton#McStudioTopPinButton {
+    border: 1px solid transparent;
+    border-radius: 9px;
+    padding: 5px;
+    background: transparent;
+}
+
+QToolButton#McStudioTopCommandButton:hover,
+QToolButton#McStudioTopPinButton:hover {
+    border: 1px solid #d5ddea;
+    background: #f2f6fc;
+}
+
+QToolButton#McStudioTopCommandButton:pressed,
+QToolButton#McStudioTopCommandButton:checked,
+QToolButton#McStudioTopPinButton:pressed,
+QToolButton#McStudioTopPinButton:checked {
+    border: 1px solid #97b7ee;
+    background: #e8f0fe;
+}
+
+QToolButton#McStudioTopCommandButton:disabled {
+    color: #a6afbb;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+QFrame#McStudioTopSeparator {
+    color: #d9e0ea;
+    background: #d9e0ea;
+    max-width: 1px;
+    margin: 10px 12px 10px 12px;
+}
+
+QLineEdit#McStudioTopSearch {
+    border: 1px solid #d2dbea;
+    border-radius: 9px;
+    padding: 5px 14px;
+    background: #ffffff;
+    color: #1f2937;
+    selection-background-color: #2d6cdf;
+}
+
+QLineEdit#McStudioTopSearch:hover {
+    border: 1px solid #aebfd8;
+}
+
+QLineEdit#McStudioTopSearch:focus {
+    border: 1px solid #2d6cdf;
+    background: #ffffff;
+}
+
+QToolButton#McStudioWorkbenchSwitcher {
+    border: 1px solid #c8d4e5;
+    border-radius: 10px;
+    padding: 6px 14px;
+    background: #ffffff;
+    color: #1f2937;
+    font-weight: 650;
+}
+
+QToolButton#McStudioWorkbenchSwitcher:hover {
+    background: #f5f8fd;
+    border: 1px solid #96b7f0;
+}
+
+QToolButton#McStudioWorkbenchSwitcher:pressed {
+    background: #e8f0fe;
+    border: 1px solid #2d6cdf;
+}
+
+QToolButton[mcStudioWindowButton="true"] {
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 4px;
+    background: transparent;
+}
+
+QToolButton[mcStudioWindowButton="true"]:hover {
+    border: 1px solid #d5ddea;
+    background: #eef3fa;
+}
+
+QToolButton#McStudioWindowCloseButton:hover {
+    border: 1px solid #c42b1c;
+    background: #c42b1c;
+    color: white;
+}

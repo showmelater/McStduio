@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Mod/McStudio">
+        <file>styles/McStudioRibbon.qss</file>
+        <file>styles/McStudioSARibbon.qss</file>
+    </qresource>
+</RCC>

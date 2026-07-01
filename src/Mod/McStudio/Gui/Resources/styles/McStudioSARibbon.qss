@@ -1,0 +1,154 @@
+/* McStudio SARibbon overlay
+ * Applied only to the McStudio SARibbonBar subtree after the built-in SARibbon
+ * theme. Tokens are replaced by McStudioTheme.cpp.
+ */
+
+SARibbonBar#McStudioSARibbonBar {
+    background-color: #f6f8fb;
+    border: none;
+    color: @mc-text-primary;
+}
+
+SARibbonCategory {
+    background-color: #ffffff;
+    border-top: none;
+    border-bottom: 1px solid #d7dde7;
+}
+
+SARibbonPanel {
+    background-color: #ffffff;
+    border-left: 1px solid transparent;
+    border-top: none;
+    border-bottom: none;
+    border-right: 1px solid #dce2eb;
+    color: @mc-text-secondary;
+    min-width: @mc-panel-min-widthpx;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+}
+
+SARibbonPanel:hover {
+    background-color: #fbfcff;
+}
+
+SARibbonPanel > SARibbonButtonGroupWidget {
+    border: none;
+    background-color: transparent;
+    spacing: 4px;
+}
+
+SARibbonPanelLabel {
+    background-color: transparent;
+    color: @mc-text-secondary;
+    min-height: @mc-panel-title-heightpx;
+    max-height: @mc-panel-title-heightpx;
+    padding: 0px 0px 2px 0px;
+    margin: 0px;
+    border: none;
+    qproperty-alignment: AlignCenter;
+}
+
+SARibbonSeparatorWidget {
+    color: @mc-border-subtle;
+}
+
+SARibbonCategory > SARibbonSeparatorWidget {
+    color: @mc-border-subtle;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+SARibbonToolButton,
+SARibbonButtonGroupWidget > QToolButton,
+SARibbonPanelOptionButton {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: @mc-text-primary;
+    background-color: transparent;
+    min-width: @mc-button-min-widthpx;
+    padding: 6px 9px;
+    margin: 2px 4px;
+}
+
+SARibbonToolButton:hover,
+SARibbonButtonGroupWidget > QToolButton:hover,
+SARibbonPanelOptionButton:hover {
+    border: 1px solid @mc-border-subtle;
+    background-color: @mc-bg-hover;
+}
+
+SARibbonToolButton:pressed,
+SARibbonToolButton:checked,
+SARibbonButtonGroupWidget > QToolButton:pressed,
+SARibbonButtonGroupWidget > QToolButton:checked,
+SARibbonPanelOptionButton:pressed {
+    border: 1px solid @mc-accent;
+    background-color: @mc-bg-pressed;
+}
+
+SARibbonToolButton:disabled,
+SARibbonButtonGroupWidget > QToolButton:disabled {
+    color: @mc-text-disabled;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+SARibbonTabBar {
+    background-color: #f6f8fb;
+    color: @mc-text-primary;
+    margin-left: 10px;
+}
+
+SARibbonTabBar::tab {
+    color: @mc-text-primary;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0px;
+    padding-left: @mc-tab-padding-hpx;
+    padding-right: @mc-tab-padding-hpx;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 3px;
+    margin-bottom: 0px;
+    min-width: @mc-tab-min-widthpx;
+}
+
+SARibbonTabBar::tab:hover,
+SARibbonTabBar::tab:hover:!selected {
+    color: @mc-text-primary;
+    background-color: #f1f5fb;
+    border: none;
+    border-bottom: 3px solid #bcd0ee;
+}
+
+SARibbonTabBar::tab:selected,
+SARibbonTabBar::tab:selected:hover {
+    color: @mc-accent;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid @mc-accent;
+    font-weight: 600;
+}
+
+SARibbonStackedWidget {
+    background-color: #ffffff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #d7dde7;
+}
+
+SARibbonMenu {
+    background-color: @mc-bg-surface;
+    color: @mc-text-primary;
+    border: 1px solid @mc-border-subtle;
+}
+
+SARibbonMenu::item:selected {
+    background-color: @mc-bg-hover;
+}
