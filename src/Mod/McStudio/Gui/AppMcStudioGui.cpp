@@ -51,6 +51,24 @@ PyMOD_INIT_FUNC(McStudioGui)
         PyMOD_Return(nullptr);
     }
 
+    // Optional modules: preloaded so their (Python-registered) commands are
+    // available to the McStudio Ribbon Annotate/Assembly tabs. These are not
+    // hard dependencies — if a module is unavailable in a given build we log a
+    // warning and continue, rather than failing the whole McStudioGui load
+    // (the Ribbon tolerates missing commands by skipping their buttons).
+    try {
+        Base::Interpreter().runString("import DraftGui");
+    }
+    catch (const Base::Exception& e) {
+        Base::Console().warning("McStudio: DraftGui preload failed (Annotate commands may be missing): %s\n", e.what());
+    }
+    try {
+        Base::Interpreter().runString("import AssemblyGui");
+    }
+    catch (const Base::Exception& e) {
+        Base::Console().warning("McStudio: AssemblyGui preload failed (Assembly commands may be missing): %s\n", e.what());
+    }
+
     CreateMcStudioCommands();
     McStudioGui::Workbench::init();
 

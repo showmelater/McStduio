@@ -135,25 +135,39 @@ McStudioThemeTokens currentMcStudioThemeTokens()
     const QFontMetrics fontMetrics(QApplication::font());
     tokens.baseIconSize = freeCADBaseToolbarIconSize();
     tokens.fontLineHeight = fontMetrics.lineSpacing();
-    tokens.smallIconSize = std::clamp(tokens.baseIconSize, 16, 32);
+    // Root-cause fix for the "small icon left-edge clipped" bug:
+    // In LooseThreeRow the per-row height for small buttons is ~1/3 of the
+    // panel content area (~27px with the compact categoryHeight). SARibbon's
+    // calcSmallButtonDrawRects() shrinks the iconRect to fit that row height
+    // (adjustIconSize by height), but paintIcon() still renders the pixmap at
+    // the *unshrunk* realIconSize() and centers it — so an oversized icon
+    // overflows the narrowed rect left/right and gets clipped. Keep the small
+    // icon comfortably below the row height (cap at 20, and never exceed the
+    // FreeCAD base size) so the icon always fits without height-driven shrink.
+    tokens.smallIconSize = std::clamp(tokens.baseIconSize, 16, 20);
+    // Compact large icon sizing to match SolidWorks (~28-36px), was 32-48.
     tokens.largeIconSize = std::clamp(
-        static_cast<int>(std::lround(tokens.baseIconSize * 1.65)),
-        32,
-        48
+        static_cast<int>(std::lround(tokens.baseIconSize * 1.5)),
+        28,
+        36
     );
 
     tokens.tabBarHeight = std::clamp(tokens.fontLineHeight + 16, 28, 36);
     tokens.titleBarHeight = 0;
-    tokens.panelTitleHeight = std::clamp(tokens.fontLineHeight + 6, 20, 26);
-    tokens.panelSpacing = std::clamp(tokens.baseIconSize / 3, 6, 12);
+    // Thinner panel title row (was 20-26).
+    tokens.panelTitleHeight = std::clamp(tokens.fontLineHeight + 4, 16, 22);
+    // Tighter in-panel spacing (was 6-12).
+    tokens.panelSpacing = std::clamp(tokens.baseIconSize / 4, 4, 8);
+    // Shorter, more compact category area (was 104-144).
     tokens.categoryHeight = std::clamp(
         tokens.largeIconSize + tokens.panelTitleHeight + tokens.fontLineHeight * 3 + 12,
-        104,
-        144
+        96,
+        128
     );
 
     tokens.panelMinWidth = std::clamp(tokens.largeIconSize * 2 + 8, 80, 120);
-    tokens.buttonMinWidth = std::clamp(tokens.smallIconSize * 2 + 8, 48, 72);
+    // Narrower medium buttons (was 48-72).
+    tokens.buttonMinWidth = std::clamp(tokens.smallIconSize * 2 + 8, 40, 60);
     tokens.tabMinWidth = std::clamp(tokens.fontLineHeight * 5, 60, 88);
     tokens.tabHorizontalPadding = std::clamp(tokens.fontLineHeight, 12, 18);
     tokens.buttonMaximumAspectRatio = tokens.baseIconSize >= 32 ? 1.75 : 1.65;

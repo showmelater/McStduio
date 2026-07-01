@@ -20,13 +20,13 @@ SARibbonPanel {
     border-left: 1px solid transparent;
     border-top: none;
     border-bottom: none;
-    border-right: 1px solid #dce2eb;
+    border-right: 1px solid #cbd3df;
     color: @mc-text-secondary;
     min-width: @mc-panel-min-widthpx;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 8px;
-    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 4px;
 }
 
 SARibbonPanel:hover {
@@ -36,12 +36,13 @@ SARibbonPanel:hover {
 SARibbonPanel > SARibbonButtonGroupWidget {
     border: none;
     background-color: transparent;
-    spacing: 4px;
+    spacing: 2px;
 }
 
 SARibbonPanelLabel {
     background-color: transparent;
     color: @mc-text-secondary;
+    font-size: 11px;
     min-height: @mc-panel-title-heightpx;
     max-height: @mc-panel-title-heightpx;
     padding: 0px 0px 2px 0px;
@@ -60,22 +61,38 @@ SARibbonCategory > SARibbonSeparatorWidget {
     margin-bottom: 8px;
 }
 
+/* SARibbonToolButton is fully self-painted: paintEvent()/calcDrawRects() lay
+   out the icon/text from the widget's rect() plus SARibbon's internal mSpacing.
+   ROOT CAUSE of the "small icon obscured" bug: a default-state
+   `border: 1px solid transparent` makes Qt's QStyleSheetStyle treat the button
+   as a CSS-box widget and hand SARibbon a contentsRect() already shrunk by the
+   1px border; SARibbon then adds its own mSpacing, so the icon is inset twice
+   and its left edge is clipped. The vendored office2021.qss avoids this by
+   using `border: none` in the default state and only adding a border on
+   hover/pressed/checked. We mirror that exactly. Padding matches the official
+   `0 2px` so spacing stays owned by SARibbon (mSpacing / panelSpacing) and icon
+   size by setPanelToolButtonIconSize(). */
 SARibbonToolButton,
 SARibbonButtonGroupWidget > QToolButton,
 SARibbonPanelOptionButton {
-    border: 1px solid transparent;
-    border-radius: 8px;
+    border: none;
     color: @mc-text-primary;
     background-color: transparent;
     min-width: @mc-button-min-widthpx;
-    padding: 6px 9px;
-    margin: 2px 4px;
+    padding: 0px 2px;
+    margin: 1px 2px;
 }
 
+/* Hover/pressed feedback uses background + rounded corners only, and keeps
+   `border: none`. Adding a real 1px border here would make QStyleSheetStyle
+   shrink the contentsRect by 1px on hover and re-clip the icon (the icon sits
+   only mSpacing=1px from the widget's left edge), causing a visible left-edge
+   clip that flickers on hover. Background-only feedback avoids that entirely. */
 SARibbonToolButton:hover,
 SARibbonButtonGroupWidget > QToolButton:hover,
 SARibbonPanelOptionButton:hover {
-    border: 1px solid @mc-border-subtle;
+    border: none;
+    border-radius: 5px;
     background-color: @mc-bg-hover;
 }
 
@@ -84,7 +101,8 @@ SARibbonToolButton:checked,
 SARibbonButtonGroupWidget > QToolButton:pressed,
 SARibbonButtonGroupWidget > QToolButton:checked,
 SARibbonPanelOptionButton:pressed {
-    border: 1px solid @mc-accent;
+    border: none;
+    border-radius: 5px;
     background-color: @mc-bg-pressed;
 }
 

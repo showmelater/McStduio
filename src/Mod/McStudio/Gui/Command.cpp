@@ -554,6 +554,45 @@ void CreateMcStudioCommands()
     rcCmdMgr.addCommand(new CmdMcStudioCompSurfaceEdit());
     rcCmdMgr.addCommand(new CmdMcStudioCompEvaluateInspect());
     rcCmdMgr.addCommand(new CmdMcStudioCompSectionTools());
+    // Annotate (Draft-based 3D annotations, preloaded in AppMcStudioGui.cpp).
+    // Dimension + hatch are aggregated here; text/label stay tiled as
+    // high-frequency buttons in the Annotate tab's Notes panel (no duplication).
+    rcCmdMgr.addCommand(new CmdMcStudioCommandGroup("McStudio_CompAnnotate",
+                                                     QT_TR_NOOP("Dimension / Hatch"),
+                                                     QT_TR_NOOP("Add Draft dimensions or hatch fills"),
+                                                     "Draft_Dimension",
+                                                     0,
+                                                     {"Draft_Dimension",
+                                                      "Draft_Hatch"}));
+    // Assembly (Assembly workbench, preloaded in AppMcStudioGui.cpp).
+    rcCmdMgr.addCommand(new CmdMcStudioCommandGroup("McStudio_CompAssemblyInsert",
+                                                     QT_TR_NOOP("Insert Component"),
+                                                     QT_TR_NOOP("Insert existing parts, new parts, or linked components"),
+                                                     "Assembly_Insert",
+                                                     0,
+                                                     {"Assembly_Insert",
+                                                      "Assembly_InsertNewPart",
+                                                      "Assembly_InsertLink"}));
+    rcCmdMgr.addCommand(new CmdMcStudioCommandGroup("McStudio_CompAssemblyJoints",
+                                                     QT_TR_NOOP("Joints"),
+                                                     QT_TR_NOOP("Create fixed, revolute, slider, cylindrical, distance, or alignment joints"),
+                                                     "Assembly_CreateJointFixed",
+                                                     0,
+                                                     {"Assembly_CreateJointFixed",
+                                                      "Assembly_CreateJointRevolute",
+                                                      "Assembly_CreateJointSlider",
+                                                      "Assembly_CreateJointCylindrical",
+                                                      "Assembly_CreateJointDistance",
+                                                      "Assembly_CreateJointParallel",
+                                                      "Assembly_CreateJointPerpendicular"}));
+    rcCmdMgr.addCommand(new CmdMcStudioCommandGroup("McStudio_CompAssemblySelect",
+                                                     QT_TR_NOOP("Diagnose Constraints"),
+                                                     QT_TR_NOOP("Select conflicting, redundant, or malformed constraints"),
+                                                     "Assembly_SelectConflictingConstraints",
+                                                     0,
+                                                     {"Assembly_SelectConflictingConstraints",
+                                                      "Assembly_SelectRedundantConstraints",
+                                                      "Assembly_SelectMalformedConstraints"}));
     rcCmdMgr.addCommand(new CmdMcStudioCommandGroup("McStudio_CompApplicationMenu",
                                                      QT_TR_NOOP("File"),
                                                      QT_TR_NOOP("Open file, save, import, export, print, preferences, and quit commands"),

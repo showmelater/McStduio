@@ -181,7 +181,7 @@ RibbonMetrics ribbonMetrics()
     metrics.spacing = scaledInt(tokens.panelSpacing, metrics.scale);
     metrics.pageMaxHeight = scaledInt(tokens.categoryHeight, metrics.scale);
     metrics.ribbonMaxHeight = metrics.pageMaxHeight + scaledInt(tokens.tabBarHeight, metrics.scale);
-    metrics.topControlBarHeight = scaledInt(std::clamp(tokens.fontLineHeight + 38, 52, 62), metrics.scale);
+    metrics.topControlBarHeight = scaledInt(std::clamp(tokens.fontLineHeight + 30, 44, 52), metrics.scale);
     return metrics;
 }
 
