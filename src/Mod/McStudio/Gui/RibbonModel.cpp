@@ -82,53 +82,84 @@ const std::vector<RibbonTabDefinition>& ribbonTabs()
             QT_TR_NOOP("Features"),
             {
                 {
-                    QT_TR_NOOP("Create"),
+                    // Body creation, sketch entry, and datum/reference geometry.
+                    QT_TR_NOOP("Body & Reference"),
                     {
-                        mediumCommand("PartDesign_Body", QT_TR_NOOP("Body")),
-                        largeCommand("PartDesign_Pad", QT_TR_NOOP("Pad")),
-                        largeCommand("PartDesign_Pocket", QT_TR_NOOP("Pocket")),
-                        largeCommand("PartDesign_Hole", QT_TR_NOOP("Hole")),
-                    },
-                },
-                {
-                    QT_TR_NOOP("Additive"),
-                    {
-                        largeCommand("PartDesign_Revolution", QT_TR_NOOP("Revolve")),
-                        mediumCommand("PartDesign_AdditivePipe", QT_TR_NOOP("Sweep")),
-                        mediumCommand("PartDesign_AdditiveLoft", QT_TR_NOOP("Loft")),
-                    },
-                },
-                {
-                    QT_TR_NOOP("Subtractive"),
-                    {
-                        largeCommand("PartDesign_Groove", QT_TR_NOOP("Groove")),
-                        mediumCommand("PartDesign_SubtractivePipe", QT_TR_NOOP("Cut Sweep")),
-                        mediumCommand("PartDesign_SubtractiveLoft", QT_TR_NOOP("Cut Loft")),
-                    },
-                },
-                {
-                    QT_TR_NOOP("Reference Geometry"),
-                    {
-                        mediumCommand("McStudio_CreateReferencePlane", QT_TR_NOOP("Plane")),
+                        largeCommand("PartDesign_Body", QT_TR_NOOP("Body")),
+                        mediumDropDownCommand("PartDesign_CompSketches", QT_TR_NOOP("Sketch")),
                         mediumDropDownCommand("PartDesign_CompDatums", QT_TR_NOOP("Datum Geometry")),
                     },
                 },
                 {
+                    // Additive features (material-adding). Mirrors FreeCAD's
+                    // "Create an additive feature" menu group.
+                    QT_TR_NOOP("Additive"),
+                    {
+                        largeCommand("PartDesign_Pad", QT_TR_NOOP("Pad")),
+                        largeCommand("PartDesign_Revolution", QT_TR_NOOP("Revolution")),
+                        mediumCommand("PartDesign_AdditiveLoft", QT_TR_NOOP("Additive Loft")),
+                        mediumCommand("PartDesign_AdditivePipe", QT_TR_NOOP("Additive Pipe")),
+                        mediumCommand("PartDesign_AdditiveHelix", QT_TR_NOOP("Additive Helix")),
+                    },
+                },
+                {
+                    // FreeCAD built-in dropdown aggregating 8 additive primitives.
+                    QT_TR_NOOP("Additive Primitives"),
+                    {
+                        dropDownCommand("PartDesign_CompPrimitiveAdditive", QT_TR_NOOP("Primitive")),
+                    },
+                },
+                {
+                    // Subtractive features (material-removing).
+                    QT_TR_NOOP("Subtractive"),
+                    {
+                        largeCommand("PartDesign_Pocket", QT_TR_NOOP("Pocket")),
+                        largeCommand("PartDesign_Hole", QT_TR_NOOP("Hole")),
+                        mediumCommand("PartDesign_Groove", QT_TR_NOOP("Groove")),
+                        mediumCommand("PartDesign_SubtractiveLoft", QT_TR_NOOP("Subtractive Loft")),
+                        mediumCommand("PartDesign_SubtractivePipe", QT_TR_NOOP("Subtractive Pipe")),
+                        mediumCommand("PartDesign_SubtractiveHelix", QT_TR_NOOP("Subtractive Helix")),
+                    },
+                },
+                {
+                    // FreeCAD built-in dropdown aggregating 8 subtractive primitives.
+                    QT_TR_NOOP("Subtractive Primitives"),
+                    {
+                        dropDownCommand("PartDesign_CompPrimitiveSubtractive", QT_TR_NOOP("Primitive")),
+                    },
+                },
+                {
+                    // Dress-up features as flat, independent SolidWorks-style entries
+                    // (replacing the previous McStudio_CompDressUpFeatures dropdown).
                     QT_TR_NOOP("Dress-Up"),
                     {
-                        dropDownCommand("McStudio_CompDressUpFeatures", QT_TR_NOOP("Dress-Up")),
+                        largeCommand("PartDesign_Fillet", QT_TR_NOOP("Fillet")),
+                        largeCommand("PartDesign_Chamfer", QT_TR_NOOP("Chamfer")),
+                        mediumCommand("PartDesign_Draft", QT_TR_NOOP("Draft")),
+                        mediumCommand("PartDesign_Thickness", QT_TR_NOOP("Thickness")),
                     },
                 },
                 {
+                    // Transformation/pattern features as flat entries
+                    // (replacing the previous McStudio_CompTransformFeatures dropdown).
                     QT_TR_NOOP("Pattern"),
                     {
-                        dropDownCommand("McStudio_CompTransformFeatures", QT_TR_NOOP("Pattern / Mirror")),
+                        largeCommand("PartDesign_Mirrored", QT_TR_NOOP("Mirror")),
+                        mediumCommand("PartDesign_LinearPattern", QT_TR_NOOP("Linear Pattern")),
+                        mediumCommand("PartDesign_PolarPattern", QT_TR_NOOP("Polar Pattern")),
+                        mediumCommand("PartDesign_MultiTransform", QT_TR_NOOP("Multi-Transform")),
+                        mediumCommand("PartDesign_Scaled", QT_TR_NOOP("Scaled")),
                     },
                 },
                 {
-                    QT_TR_NOOP("Boolean"),
+                    // Boolean and structural helpers (binders, clone, migrate).
+                    QT_TR_NOOP("Boolean & Structure"),
                     {
-                        mediumCommand("PartDesign_Boolean", QT_TR_NOOP("Boolean")),
+                        largeCommand("PartDesign_Boolean", QT_TR_NOOP("Boolean")),
+                        mediumCommand("PartDesign_ShapeBinder", QT_TR_NOOP("Shape Binder")),
+                        mediumCommand("PartDesign_SubShapeBinder", QT_TR_NOOP("Sub-Object Binder")),
+                        smallCommand("PartDesign_Clone", QT_TR_NOOP("Clone")),
+                        smallCommand("PartDesign_Migrate", QT_TR_NOOP("Migrate")),
                     },
                 },
             },
