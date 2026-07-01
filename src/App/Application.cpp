@@ -2118,11 +2118,14 @@ void initExceptions()
 void Application::init(int argc, char ** argv)
 {
     try {
+        //异常和奔溃处理
         Base::SystemHandler::installNewHandler();
         Base::SystemHandler::installSegfaultHandler();
 
+        //注册 FreeCAD App 层所有 C++ 类型
         initTypes();
 
+        //初始化参数
         initConfig(argc,argv);
         initApplication();
         initExceptions();
@@ -2134,6 +2137,7 @@ void Application::init(int argc, char ** argv)
     }
 }
 
+//注册对象，建立类的地图，而不是创建对象
 // clang-format off
 void Application::initTypes()
 {

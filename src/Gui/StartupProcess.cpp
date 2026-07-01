@@ -478,15 +478,28 @@ void StartupPostProcess::showMainWindow()
 void StartupPostProcess::activateWorkbench()
 {
     // Activate the correct workbench
-    std::string start = App::Application::Config()["StartWorkbench"];
+    const std::string configuredStart = App::Application::Config()["StartWorkbench"];
+    std::string start = configuredStart;
     Base::Console().log("Init: Activating default workbench %s\n", start.c_str());
-    std::string autoload = App::GetApplication()
-                               .GetParameterGroupByPath("User parameter:BaseApp/Preferences/General")
-                               ->GetASCII("AutoloadModule", start.c_str());
-    if ("$LastModule" == autoload) {
-        start = App::GetApplication()
-                    .GetParameterGroupByPath("User parameter:BaseApp/Preferences/General")
-                    ->GetASCII("LastModule", start.c_str());
+    auto generalPreferences = App::GetApplication().GetParameterGroupByPath(
+        "User parameter:BaseApp/Preferences/General"
+    );
+    std::string autoload = generalPreferences->GetASCII("AutoloadModule", start.c_str());
+
+    // McStudio product shell starts in McStudio by default. FreeCAD's Start migrator and
+    // previous user preferences can otherwise rewrite AutoloadModule to PartDesignWorkbench.
+    // Keep command-line/config overrides working: only force McStudio when StartWorkbench itself
+    // is configured as McStudioWorkbench.
+    if (configuredStart == "McStudioWorkbench") {
+        if (autoload != configuredStart) {
+            Base::Console().message("McStudioStartup: ignoring AutoloadModule='%s'; product default is '%s'.\n",
+                                    autoload.c_str(),
+                                    configuredStart.c_str());
+        }
+        start = configuredStart;
+    }
+    else if ("$LastModule" == autoload) {
+        start = generalPreferences->GetASCII("LastModule", start.c_str());
     }
     else {
         start = autoload;
@@ -494,7 +507,12 @@ void StartupPostProcess::activateWorkbench()
     // if the auto workbench is not visible then force to use the default workbech
     // and replace the wrong entry in the parameters
     QStringList wb = guiApp.workbenches();
+    Base::Console().message("McStudioStartup: requested startup workbench='%s', available workbenches=%s.\n",
+                            start.c_str(),
+                            wb.join(QLatin1Char(',')).toUtf8().constData());
     if (!wb.contains(QString::fromLatin1(start.c_str()))) {
+        Base::Console().warning("McStudioStartup: requested startup workbench '%s' is not in visible workbench list; falling back to configured StartWorkbench.\n",
+                                start.c_str());
         start = App::Application::Config()["StartWorkbench"];
         if ("$LastModule" == autoload) {
             App::GetApplication()
@@ -511,7 +529,10 @@ void StartupPostProcess::activateWorkbench()
     // Call this before showing the main window because otherwise:
     // 1. it shows a white window for a few seconds which doesn't look nice
     // 2. the layout of the toolbars is completely broken
-    guiApp.activateWorkbench(start.c_str());
+    const bool startupWorkbenchActivated = guiApp.activateWorkbench(start.c_str());
+    Base::Console().message("McStudioStartup: activateWorkbench('%s') returned %s before main window show.\n",
+                            start.c_str(),
+                            startupWorkbenchActivated ? "true" : "false");
 
     // show the main window
     if (!Application::hiddenMainWindow()) {
@@ -524,7 +545,10 @@ void StartupPostProcess::activateWorkbench()
     autoloadModules(wb);
 
     // Reactivate the startup workbench
-    guiApp.activateWorkbench(start.c_str());
+    const bool startupWorkbenchReactivated = guiApp.activateWorkbench(start.c_str());
+    Base::Console().message("McStudioStartup: reactivateWorkbench('%s') returned %s after main window show.\n",
+                            start.c_str(),
+                            startupWorkbenchReactivated ? "true" : "false");
 }
 
 void StartupPostProcess::setStyleSheet()

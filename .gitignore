@@ -72,3 +72,11 @@ tsupdate_stdout.log
 # pixi environments
 *.egg-info
 .pixi
+
+# McStudio: SARibbon vendored third-party lib (not yet version-controlled here)
+/SARibbon/
+# McStudio: local example/demo artifacts not tracked in source
+/test1.FCStd
+/demo/
+/data/skills/
+/skills-lock.json

@@ -119,6 +119,7 @@ if(BUILD_TECHDRAW)
 endif(BUILD_TECHDRAW)
 
 #add_subdirectory(TemplatePyMod)
+add_subdirectory(McStudio)
 
 if(BUILD_TEST)
   add_subdirectory(Test)
